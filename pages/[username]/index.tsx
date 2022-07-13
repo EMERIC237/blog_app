@@ -5,8 +5,8 @@ import { db, getUserWithUsername, postToJSON } from '../../lib/firebase'
 import { UserModel, PostModel } from '../../lib/types'
 import { query, collection, where, getDocs, limit, orderBy } from 'firebase/firestore'
 
-export async function getServerSideProps({ query }) {
-  const { username } = query
+export async function getServerSideProps({ query: serverquery }: { query: { username: string } }) {
+  const { username } = serverquery
   const userDoc = await getUserWithUsername(username)
 
   // JSON serialization of the user object
@@ -16,6 +16,7 @@ export async function getServerSideProps({ query }) {
     user = userDoc.data()
     const postsQuery = query(collection(db, 'posts'), where('published', '==', true), orderBy('createdAt', 'desc'), limit(5))
     const postsSnapshot = await getDocs(postsQuery)
+    posts = postsSnapshot.docs.map(postToJSON)
   }
   return {
     props: {
