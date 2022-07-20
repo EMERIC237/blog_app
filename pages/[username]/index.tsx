@@ -30,7 +30,7 @@ export default function UserProfilePage({ user, posts }: { user: UserModel, post
   return (
     <main>
       <UserProfile user={user} />
-      {posts.length > 0 && <PostFeed posts={posts} admin={true} />}
+      {posts && <PostFeed posts={posts} admin={true} />}
     </main>
   )
 }

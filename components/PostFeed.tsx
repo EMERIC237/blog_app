@@ -4,7 +4,7 @@ import { PostModel } from '../lib/types';
 // props interface
 interface feedProps {
     posts: PostModel[];
-    admin: boolean;
+    admin?: boolean;
 }
 
 export default function PostFeed({ posts, admin }: feedProps) {

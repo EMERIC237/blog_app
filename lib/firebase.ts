@@ -1,9 +1,10 @@
+import { timeStamp } from "console";
 import { initializeApp } from "firebase/app";
 import { GoogleAuthProvider, getAuth } from "firebase/auth";
 import {
   getFirestore,
   collection,
-  getDoc,
+  Timestamp,
   limit,
   where,
   doc,
@@ -53,3 +54,5 @@ export async function getUserWithUsername(username: string) {
     updatedAt: data.updatedAt.toMillis(),
   };
 }
+
+export const fromMillis = Timestamp.fromMillis;
